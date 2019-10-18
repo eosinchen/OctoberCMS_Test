@@ -1,0 +1,92 @@
+title = "EventNoTest"
+url = "/eventnotest"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+    // $this['event_result'] = $this->checkEvent('ST042910074115');
+	
+    // $this['addEvent'] = $this->addEvent('ST042910074115_123');
+
+	
+	// $this->getProdFromEShop();
+
+    // $this->getEventProdFromEShop('ST042910074115');
+    
+}
+
+function checkEvent($eventNo)
+{
+    $sql = "SELECT *
+        from eventtb
+        where eventtb.eventNo = '$eventNo'";
+
+    $event_query = Db::connection('porclean')->select($sql);
+
+    if($event_query){
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+function addEvent($eventNo)
+{
+	$sql = "INSERT into eventtb set 
+				kind	  = 'reSeller',
+				eventNo   = '$eventNo',
+				eventDate = '2019-09-01',
+				closeDate = '2021-12-31',
+				mid		  = '0',
+				onweb     = '1',
+				finish    = '1'
+			";
+	
+	$this['addEvent'] = Db::connection('porclean')->insert($sql);
+}
+
+/*
+function getProdFromEShop()
+{
+    $sql = "SELECT prodtb.*,
+        classtb.cName as className 
+        from prodtb 
+        left join classtb on prodtb.cid = classtb.cid
+        where prodtb.trash = '0' 
+        and prodtb.finish = '1'
+        order by prodtb.sort asc,prodtb.pid desc";
+
+    $this['prods'] = Db::connection('porclean')->select($sql);
+}
+
+function getEventProdFromEShop($eventNo = false)
+{
+	
+	$sql = "SELECT eventProdtb.*,
+				   prodtb.prodName,
+				   prodtb.price as price_o 
+			  from eventProdtb 
+		 left join prodtb
+				on eventProdtb.pid = prodtb.pid
+			 where eventProdtb.eventNo = '$eventNo' 
+			   and eventProdtb.trash = '0'
+			   and prodtb.trash = '0'
+			   and prodtb.onweb = '1'
+		  order by eventProdtb.sort asc, eventProdtb.price asc"; 
+	
+    $this['eventProds'] = Db::connection('porclean')->select($sql);
+}
+*/
+?>
+==
+<div class='container'>
+
+	{{event_result}}
+	<br>
+	{{addEvent}}
+	<br>
+	 
+</div>

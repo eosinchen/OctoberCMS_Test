@@ -1,0 +1,239 @@
+title = "FormTest_1"
+url = "/AppTest/formtest_1/:id?"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use October\Rain\Auth\Manager;
+
+use PORClean\Apptest\Models\Table1;
+
+function onStart()
+{
+
+    // 這是用參數的傳法與取法
+    // 若用 xxx/?id=1 的方式，就要用 Input 來取得
+    // $this['post_id'] = Input::get('post_id');
+
+    // OctoberCMS 可用 xxx/1 (後面用順序)，就用 param 來取
+    $this['id'] = $this->param('id');
+
+    // 取得符合 ID 的資料結果
+    // 作 select 的意思
+    $posts = Table1::where('id', $this['id'])->get();
+    // $this['posts'] = Table1::where('id', $this['id'])->get();
+    
+    // 將 select 的結果，放到變數中，以便給 html 表單使用
+    foreach($posts as $post) {
+
+        $this['id'] = $post->id;
+        $this['name'] = $post->name;
+        $this['addr_city'] = $post->addr_city;
+        $this['addr_area'] = $post->addr_area;
+        $this['addr_stress'] = $post->addr_stress;
+
+    }
+
+    // $this['name'] = 'Name-ABC';
+    
+    //$this['posts'] = Table1::find($this['post_id']);
+    
+}
+
+function onFormSubmit()
+{
+
+    $user = Auth::register([
+        'name' => 'Some User',
+        'email' => 'some12345@website.tld',
+        'password' => 'changeme',
+        'password_confirmation' => 'changeme',
+    ], true);    
+    
+    
+    if ($user) {
+        $this['result'] = '註冊成功';
+    }
+    
+    /*
+
+    $account = input('txtAccount');
+    $email = input('txtEmail');
+    $password = input('txtPassword');
+
+
+
+
+
+
+
+    $id = input('txtID');
+    $name = input('txtName');
+    $addr_city = input('txtAddr_City');
+    $addr_area = input('txtAddr_Area');
+    $addr_stress = input('txtAddr_Stress');
+    
+    if ($id) {
+        // 有 ID 時，作 Update
+        $NewTable = Table1::find($id);
+
+        $this['result'] = '更新成功';
+    }
+    else {
+        // 沒有 ID 代表新增
+        $NewTable = new Table1;
+
+        $this['result'] = '新增成功';
+    }
+
+    $NewTable->name = $name;
+    $NewTable->addr_city = $addr_city;
+    $NewTable->addr_area = $addr_area;
+    $NewTable->addr_stress = $addr_stress;
+
+    $NewTable->save();
+    */
+}
+
+function onForm2Submit()
+{
+
+    $user = Auth::register([
+        'name' => 'Some User',
+        'email' => 'some1234567890@website.tld',
+        'password' => 'changeme',
+        'password_confirmation' => 'changeme',
+    ], true);    
+    
+    
+    if ($user) {
+        $this['result'] = '註冊成功';
+    }
+    
+    /*
+
+    $account = input('txtAccount');
+    $email = input('txtEmail');
+    $password = input('txtPassword');
+
+
+
+
+
+
+
+    $id = input('txtID');
+    $name = input('txtName');
+    $addr_city = input('txtAddr_City');
+    $addr_area = input('txtAddr_Area');
+    $addr_stress = input('txtAddr_Stress');
+    
+    if ($id) {
+        // 有 ID 時，作 Update
+        $NewTable = Table1::find($id);
+
+        $this['result'] = '更新成功';
+    }
+    else {
+        // 沒有 ID 代表新增
+        $NewTable = new Table1;
+
+        $this['result'] = '新增成功';
+    }
+
+    $NewTable->name = $name;
+    $NewTable->addr_city = $addr_city;
+    $NewTable->addr_area = $addr_area;
+    $NewTable->addr_stress = $addr_stress;
+
+    $NewTable->save();
+    */
+}
+
+?>
+==
+<div class="container">
+
+    <h3 style="margin:20px">資料管理</h3>
+
+    <form style="margin:20px">
+
+        {{ form_select('size', ['Large', 'Small', '123', '456'], 3) }}
+
+        <div class="form-group">
+            <label for="txtID">ID</label>
+            <input type="text" class="form-control" name="txtID" id="txtID" readonly value="{{id}}">
+        </div>
+    
+        <!-- 使用分頁的方式 -->
+        <ul id="myTab" class="nav nav-tabs">
+    	    <li class="active"><a href="#home" data-toggle="tab">姓名</a></li>
+    	    <li><a href="#block1" data-toggle="tab">區塊一</a></li>
+    	    <li><a href="#block2" data-toggle="tab">區塊二</a></li>
+    	    <li><a href="#block3" data-toggle="tab">區塊三</a></li>
+        </ul>
+    
+        <div id="myTabContent" class="tab-content">
+
+            <legend>姓名相關</legend>
+            <div class="tab-pane fade in active" id="home">
+                <div class="form-group">
+                    <label for="txtName">姓名</label>
+                    <input type="text" class="form-control" name="txtName" id="txtName" value="{{name}}">
+                </div>
+    	    </div>
+
+    
+            <div class="tab-pane fade" id="block1">
+                <div class="form-group">
+                    <label for="txtAddr_City">縣市</label>
+                    <input type="text" class="form-control" name="txtAddr_City" id="txtAddr_City" value="{{addr_city}}">
+                </div>
+        
+                <div class="form-group">
+                    <label for="txtAddr_Area">地區</label>
+                    <input type="text" class="form-control" name="txtAddr_Area" id="txtAddr_Area" value="{{addr_area}}">
+                </div>
+        	</div>
+
+        	<div class="tab-pane fade" id="block2">
+    	    	<p>block2</p>
+        	</div>
+
+        	<div class="tab-pane fade" id="block3">
+                <div class="form-group">
+                    <label for="txtAddr_Stress">街道</label>
+                    <input type="text" class="form-control" name="txtAddr_Stress" id="txtAddr_Stress" value="{{addr_stress}}">
+                </div>
+        	</div>
+
+        </div>
+
+        <fieldset>
+            <legend>帳號相關</legend>
+
+            <div class="form-group">
+                <label for="txtAccount">帳號</label>
+                <input type="text" class="form-control" name="txtAccount" id="txtAccount" value="{{name}}">
+            </div>
+    
+            <div class="form-group">
+                <label for="txtEmail">電子郵件</label>
+                <input type="email" class="form-control" name="txtEmail" id="txtEmail">
+            </div>
+    
+            <div class="form-group">
+                <label for="txtPassword">密碼</label>
+                <input type="password" class="form-control" name="txtPassword" id="txtPassword">
+            </div>
+        </fieldset>
+
+        <input data-request="onFormSubmit" data-request-update="calcresult: '#result'" class="btn btn-primary" type="submit" value="提交" />
+
+        <input data-request="onForm2Submit" data-request-update="calcresult: '#result'" class="btn btn-primary" type="submit" value="提交" />
+    </form>
+
+    <!-- The result -->
+    <div id="result">{% partial "calcresult" %}</div>
+
+</div>

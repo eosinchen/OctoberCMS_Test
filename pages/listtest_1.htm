@@ -1,0 +1,65 @@
+title = "ListTest_1"
+url = "/AppTest/ListTest_1"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Apptest\Models\Table1;
+
+function onStart() {
+    // echo phpinfo();
+    
+    $rs = Table1::all();
+
+    $this['posts'] = Table1::all();
+
+    $rs_array = array();
+
+    foreach ($rs as $rs_one) {
+        // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+        $name = $rs_one['name'];
+        // echo $name;
+        // echo "<br>";
+        // echo 1;
+        
+        // echo show_list();
+   }
+}
+?>
+==
+<div class="container">
+
+    <button type="submit" style="margin:20px" onclick="location.href='/AppTest/formtest_1/'">新增</button>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>姓名</th>
+                <th>修改</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for post in posts %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.name}}</td>
+                <td><button type="submit" onclick="location.href='/AppTest/formtest_1/'+{{post.id}}">修改</button></td>
+            </tr>
+            {% endfor %}            
+            
+        </tbody>
+
+    </table>
+
+    <select>
+
+        {% for post in posts %}
+            <option value={{post.id}}>{{post.name}}</option>
+        {% endfor %}            
+
+    </select>
+
+
+</div>

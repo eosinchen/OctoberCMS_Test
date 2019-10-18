@@ -1,0 +1,110 @@
+title = "VueTable"
+url = "/vuetable"
+layout = "default"
+is_hidden = 0
+==
+<div class="container">
+
+    <div id="app">
+
+        <div class="col-xs-5" id="mail_div">
+            <label for="mail">Mail:</label>
+            <input v-model="mail" placeholder="E-mail adress:" type="text" class="form-control" id="mail">
+        </div>
+        
+        <div class="col-xs-5" id="date_div">
+            <label for="date">Date:</label>
+            <div class='input-group date' id='datetimepicker1'>
+            <input v-model="date" placeholder="Pick a date:" type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            </div>
+        </div>
+        
+        <div class="col-xs-5" id="adress_div">
+            <label for="adress">Adress:</label>
+            <input v-model="adress" placeholder="Adress of the point:"type='text' class="form-control" id="adress">
+        </div> 
+
+        <div class="col-xs-5" id="company_div">
+            <label for="company">Company:</label>
+            <input v-model="company" placeholder="Company name:"type='text' class="form-control" id="company">
+        </div> 
+
+    <div class="col-xs-5" id="fliers_div">
+        <label for="fliers">Number:</label>
+        <input v-model="fliers" placeholder="Write the number:" type='number' class="form-control" id="fliers">   
+    </div>    
+
+    <div id="table">
+        <table class="table">
+            <thead>
+                <th scope="col">Mail</th>
+                <th scope="col">Date</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Company</th>
+                <th scope="col">Number</th>
+            </thead>
+            <tbody>
+                <tr v-for="item in rowData" >
+                  <th scope="row">{{ item.mail }}</th>
+                  <td>{{ item.date }}</td>
+                  <td>{{ item.adress }}</td>
+                  <td>{{ item.company }}</td>
+                  <td>{{ item.fliers }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="button">
+        <div id="button_container_1">
+            <button type="button" class="btn btn-primary" @click.prevent="addItem()">Add a row</button>
+        </div>
+        <div id="button_container_2">
+            <button type="button" class="btn btn-success">Download</button>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<script type="text/javascript">
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        mail:'',
+        date:'',
+        adress:'',
+        company:'',
+        fliers:'',
+        rowData:[] //the declared array
+      },
+      methods:{
+        addItem(){
+          var my_object = {
+            mail:this.mail,
+            mail:"123",
+            date:this.date,
+            adress:this.adress,
+            company: this.company,
+            fliers: this.fliers
+          };
+          this.rowData.push(my_object)
+    
+          this.mail = '';
+          this.date = '';
+          this.adress = '';
+          this.company = '';
+          this.fliers = '';
+        }
+      }
+    })
+    
+</script>

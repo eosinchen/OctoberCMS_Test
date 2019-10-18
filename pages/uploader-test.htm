@@ -1,0 +1,52 @@
+title = "Uploader Test"
+url = "/uploader-test/:id?"
+layout = "default"
+description = "Test For Uploader"
+is_hidden = 0
+
+[imageUploader]
+placeholderText = "Click or drag images to upload"
+maxSize = 5
+fileTypes = ".gif,.jpg,.jpeg,.png"
+imageWidth = 300
+imageHeight = 300
+imageMode = "crop"
+deferredBinding = 1
+==
+<?php
+use PORClean\Reseller\Models\Grade;
+
+function onInit()
+{
+    // $this->imageUploader->bindModel('bank_image', new Grade);
+	
+    // OctoberCMS 可用 xxx/1 (後面用順序)，就用 param 來取
+    $this['id'] = $this->param('id');
+	
+	$grade_item = Grade::find($this['id']);
+		
+	if ($grade_item) {
+		$this->imageUploader->bindModel('clinic_image_2', $grade_item);
+	}
+	else {
+		$this->imageUploader->bindModel('clinic_image_2', new Grade);
+	}
+    
+}
+
+function onStart()
+{
+
+    // $this->imageUploader->bindModel('bank_image', Grade::find(25));
+
+}
+
+?>
+==
+<form>
+	
+	id:{{id}}
+
+    {% component 'imageUploader' %}
+
+</form>

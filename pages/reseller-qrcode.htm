@@ -1,0 +1,58 @@
+title = "ReSeller QRCode"
+url = "/reseller-qrcode"
+layout = "default"
+is_hidden = 0
+==
+<?php
+//亂數英文
+function randEng($id_len){
+
+	// $id_len = 1;//字串長度
+	$id     = '';
+	$word   = 'ABCDEFGHIJKMNPQRSTUVWXY';//字典檔 你可以將 數字 0 1 及字母 O L 排除
+	$len    = strlen($word);//取得字典檔長度
+ 
+    for($i = 0; $i < $id_len; $i++){ //總共取 幾次
+        $id .= $word[rand() % $len];//隨機取得一個字元
+    }
+    return $id;//回傳亂數帳號
+}
+
+function onStart()
+{
+    $this['qrcode'] = "https://porclean.com.tw/event/".$this->randEng(4).date("mdHis");
+}
+?>
+==
+<div class="container">
+
+    <!--
+        cht=圖表格式，填qr即可
+        chs=條碼大小，填入wdith x height，注意寬度跟高度中間是英文字母的x
+        chl=條碼內要存放的資料
+        choe=編碼方式，建議填UTF-8
+        chld=容錯能力，分成L、M、Q、H四個等級
+    -->
+    
+    
+    <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{qrcode}}&choe=UTF-8">
+    
+
+    <div id="app">
+        {{ qrcode }}
+    <div>
+    
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                message:'Hello World!!'
+    
+            }
+            
+        })
+    
+    </script>
+</div>

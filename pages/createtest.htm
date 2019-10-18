@@ -1,0 +1,162 @@
+title = "CreateTest"
+url = "/createtest"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Reseller\Models\Seller;
+
+function onStart()
+{
+    // echo phpinfo();
+    
+   $rs = Seller::all();
+   $rs_array = array();
+
+   foreach ($rs as $rs_one) {
+       // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+       $name = $rs_one['name'];
+       echo $name;
+       echo "<br>";
+       // echo 1;
+   }
+}
+
+function allianceEdit() {
+    
+    $rs = Seller::all();
+    $rs_array = array();
+
+    foreach ($rs as $rs_one) {
+        // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+        $name = $rs_one['name'];
+        echo $name;
+        echo "<br>";
+        // echo 1;
+    }
+    
+    echo "ABC";
+}
+?>
+==
+<div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+
+                    <form id="form" action="">
+                    <input type="hidden" name="action" value="allianceModify">
+                    <input type="hidden" name="id" class="id" value="<?php echo $id;?>">
+                    
+                        <div class="formGroup">
+                            <label>*聯盟名稱</label>
+                            <input type="text" name="Name" class="form-control border-input" value="<?php echo $alliance['Name']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*電話</label>
+                            <input type="text" name="Tel" class="form-control border-input" value="<?php echo $alliance['Tel']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*地址_縣市</label>
+                            <input type="text" name="Addr_City" class="form-control border-input" value="<?php echo $alliance['Addr_City']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*地址_區鄉鎮</label>
+                            <input type="text" name="Addr_Area" class="form-control border-input" value="<?php echo $alliance['Addr_Area']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*地址_街道號碼</label>
+                            <input type="text" name="Addr_Stress" class="form-control border-input" value="<?php echo $alliance['Addr_Stress']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*負責人</label>
+                            <input type="text" name="Responser" class="form-control border-input" value="<?php echo $alliance['Responser']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*帳號</label>
+                            <input type="text" name="Account" class="form-control border-input" value="<?php echo $alliance['Account']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*密碼</label>
+                            <input type='text' name="Password" class="form-control border-input">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*確認密碼</label>
+                            <input type='text' name="RePassword" class="form-control border-input">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*統一編號</label>
+                            <input type='text' name="UID" class="form-control border-input" value="<?php echo $alliance['UID']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*PORClean負責業務</label>
+                            <input type='text' name="Businesser" class="form-control border-input" value="<?php echo $alliance['Businesser']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*分潤方式</label>
+                            <input type='text' name="SharePercent" class="form-control border-input" value="<?php echo $alliance['SharePercent']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*銀行名稱</label>
+                            <input type='text' name="BankName" class="form-control border-input" value="<?php echo $alliance['BankName']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*分行名稱</label>
+                            <input type='text' name="BankDepartName" class="form-control border-input" value="<?php echo $alliance['BankDepartName']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*帳號</label>
+                            <input type='text' name="BankAccount" class="form-control border-input" value="<?php echo $alliance['BankAccount']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*戶名</label>
+                            <input type='text' name="BankAccName" class="form-control border-input" value="<?php echo $alliance['BankAccName']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*開始分潤日期</label>
+                            <input type='date' name="BeginShareDateTime" class="form-control border-input" value="<?php echo $alliance['BeginShareDateTime']; ?>">
+                        </div>
+
+                        <div class="formGroup">
+                            <label>*停止分潤日期</label>
+                            <input type='date' name="EndShareDateTime" class="form-control border-input" value="<?php echo $alliance['BeginShareDateTime']; ?>">
+                        </div>
+
+                        <br>
+                        
+                        <!--
+                        <div class="formGroup">
+                            <label>內容描述</label>
+                            <textarea name="content" class="content">< ?php echo $prod['content']; ?></textarea>
+                        </div>
+                        -->
+
+                        <div class="text-center">
+                            <button class="btn btn-info btn-fill btn-wd btnSave" @click.prevent="allianceEdit()">儲存</button>
+                        </div>
+                    
+                    </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

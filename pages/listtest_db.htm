@@ -1,0 +1,44 @@
+title = "ListTest_DB"
+url = "/listtest_db"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Reseller\Models\Seller;
+use PORClean\Reseller\Models\Grade;
+use PORClean\Apptest\Models\EventTB;
+
+function onStart()
+{
+    // echo phpinfo();
+    
+   // $rs = Seller::all();
+   // $rs = Grade::all();
+   // $rs = EventTB::all();
+   $rs = Db::connection('porclean')->select('select * from eventtb');
+   $rs_array = array();
+
+   foreach ($rs as $rs_one) {
+       // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+       // $name = $rs_one['content'];
+       echo $rs_one->content;
+       echo "<br>";
+       // echo 1;
+   }
+
+}
+?>
+==
+<div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="searchArea">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" v-model="keyword" @keyup="search()">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

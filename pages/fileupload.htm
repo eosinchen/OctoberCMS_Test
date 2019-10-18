@@ -1,0 +1,48 @@
+title = "FileUpload"
+url = "/fileupload"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Apptest\Models\Table1;
+
+
+function onSave(){
+    
+   $Table1 = new Table1();
+
+   // $actor->name = Input::get('name');
+   // $actor->lastname = Input::get('lastname');
+   
+   $Table1->name = "Upload1 Test";
+   $Table1->featured_image = Input::file('actorimage');
+   $Table1->save();
+   
+   Flash::success('Actor added!');
+
+   // return Redirect::back();
+}
+?>
+==
+<div class="container">
+
+    <form method="POST" action="{{ url('fileupload') }}" accept-charset="UTF8" enctype="multipart/form-data">
+    
+        <input type="hidden" name="_handler" value="onSave">
+        {{ form_token() }}
+        {{ form_sessionKey() }}
+    
+        <label>Actor name</label>
+        <input type="text" name="name">
+    
+        <label>Actor last name</label>
+        <input type="text" name="lastname">
+    
+        <label>Actor image</label>
+        <input type="file" name="actorimage">
+    
+        <button type="submit">Save actor</button>
+    
+    </form>
+
+</div>

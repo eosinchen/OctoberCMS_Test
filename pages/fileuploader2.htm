@@ -1,0 +1,42 @@
+title = "fileuploader2"
+url = "/fileuploader2"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Apptest\Models\Table1;
+
+function onSubmit()
+{
+    // get all post data
+    // $data = post();
+    // $form = YourModel::make($data);
+    
+    // set specific field as we need
+    
+    $Table1 = new Table1();
+
+    $Table1->name = "Upload1 Test";
+    $Table1->featured_image = Input::file('form_files');
+    $Table1->save();
+
+    $this['result'] = '上傳成功';
+
+    // Note:
+    // $data = post();
+    // $data['form_files'] = Input::file('form_files');  <-- this won't work!
+    // YourModel::create($data);
+}
+?>
+==
+<div class="container">
+
+    <form data-request="onSubmit" data-request-files data-request-update="calcresult: '#result'">
+        <input type="file" name="form_files">
+        <input type="submit">
+    </form>
+
+    <!-- The result -->
+    <div id="result">{% partial "calcresult" %}</div>
+
+</div>

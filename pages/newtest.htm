@@ -1,0 +1,70 @@
+title = "TabTest"
+url = "/tabtest"
+layout = "default"
+is_hidden = 0
+==
+<?php
+use PORClean\Reseller\Models\Seller;
+
+function onStart()
+{
+    // echo phpinfo();
+
+    /*    
+    $rs = Seller::all();
+    $rs_array = array();
+
+    foreach ($rs as $rs_one) {
+        // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+        $name = $rs_one['name'];
+        echo $name;
+        echo "<br>";
+        // echo 1;
+    }
+    */
+
+}
+?>
+==
+<div class="container">
+
+    <!-- 使用分頁的方式 -->
+    <ul id="myTab" class="nav nav-tabs">
+	    <li class="active"><a href="#home" data-toggle="tab">姓名</a></li>
+	    <li><a href="#block1" data-toggle="tab">區塊一</a></li>
+	    <li><a href="#block2" data-toggle="tab">區塊二</a></li>
+	    <li><a href="#block3" data-toggle="tab">區塊三</a></li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+
+    	<div class="tab-pane fade" id="home">
+	    	<p>HOME</p>
+    	</div>
+
+        <div class="tab-pane fade" id="block1">
+            <div class="form-group">
+                <label for="txtAddr_City">縣市</label>
+                <input type="text" class="form-control" name="txtAddr_City" id="txtAddr_City" value="{{addr_city}}">
+            </div>
+    
+            <div class="form-group">
+                <label for="txtAddr_Area">地區</label>
+                <input type="text" class="form-control" name="txtAddr_Area" id="txtAddr_Area" value="{{addr_area}}">
+            </div>
+    	</div>
+
+    	<div class="tab-pane fade" id="block2">
+	    	<p>block2</p>
+    	</div>
+
+    	<div class="tab-pane fade" id="block3">
+            <div class="form-group">
+                <label for="txtAddr_Stress">街道</label>
+                <input type="text" class="form-control" name="txtAddr_Stress" id="txtAddr_Stress" value="{{addr_stress}}">
+            </div>
+    	</div>
+
+    </div>
+
+</div>

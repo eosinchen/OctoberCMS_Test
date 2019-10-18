@@ -1,0 +1,68 @@
+title = "ListTest"
+url = "/listtest"
+is_hidden = 0
+==
+<?php
+use PORClean\Reseller\Models\Seller;
+
+function onStart()
+{
+    // echo phpinfo();
+    
+   $rs = Seller::all();
+   $rs_array = array();
+
+   foreach ($rs as $rs_one) {
+       // $rs_array[$rs_one['id']] = $rs_one['name'].'/'.$rs_one['tel'];
+       $name = $rs_one['name'];
+       echo $name;
+       echo "<br>";
+       // echo 1;
+   }
+
+}
+?>
+==
+<div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="searchArea">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" v-model="keyword" @keyup="search()">
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+
+                    <div class="card">
+                        <div class="cardTable">
+                            <div class="tr th">
+                                <div class="td Name">代理商名稱</div>
+                                <div class="td Responser">負責人</div>
+                                <div class="td Tel">電話</div>
+                                <div class="td UID">統一編號</div>
+                                <div class="td Action">操作</div>
+                            </div>
+                            
+                            <div class="tr" v-for="item in prodList">
+                                <div class="td Name">{{ $name }}</div>
+                                <div class="td Responser">{{ $name }}</div>
+                                <div class="td Tel">{{ $name }}</div>
+                                <div class="td UID">{{ $name }}</div>
+                                <div class="td Action">
+                                    <a class="btn" :href="'/admin/alliance/edit/'+item.pid"><i class="far fa-edit"></i></a>
+                                    <!-- <button class="btn" @click.prevent="allianceTrash(item)" ><i class="far fa-trash-alt"></i></button> -->
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="card cardPagination">
+                        <div id="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
